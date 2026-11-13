@@ -1,17 +1,22 @@
 // Optimize generated image copies for small UI use. Generated originals are retained.
+import { sep } from "node:path";
 import { createRequire } from "node:module";
 import { mkdir, writeFile } from "node:fs/promises";
+function sourceDirectory(name) {
+  const directory = process.env[name];
+  if (!directory) throw new Error(`Set ${name} to the directory containing the source images.`);
+  return directory + sep;
+}
+
 const require = createRequire(import.meta.url);
 const sharp = require(
   require.resolve("sharp", {
     paths: [
-      process.env.STORM_IMAGE_MODULES ||
-        "C:/Users/PC/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      process.env.STORM_IMAGE_MODULES || process.cwd(),
     ],
   }),
 );
-const root =
-  "E:/Codex/Data/generated_images/01a150be-db1d-7452-94df-4aa5689cf19c/";
+const root = sourceDirectory("STORM_CURRENT_IMAGES");
 const sources = {
   cases: "exec-dcfaeb8a-6104-4c33-9421-a01e4b1f60b1.png",
   upgrade: "exec-abb0cbd1-b82c-434a-8d05-f02b0a780dea.png",

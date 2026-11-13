@@ -38,7 +38,6 @@ npm run capture
 
 ## Черновик
 
-[Черновик №634880](https://games.yandex.ru/console/application/634880#application-info-draft).
 
 Название RU: «Шторм батл - соревнование за лучший дроп». EN: «Storm Battle - Race for the best drop». В форме Консоли длинное тире было удалено при вводе, поэтому используется обычный дефис; слова согласованы с обложками и игрой.
 

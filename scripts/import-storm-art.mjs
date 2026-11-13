@@ -1,20 +1,24 @@
 // Extract existing generated inventory sprites and optimize project copies.
 // Originals remain in Codex's generated_images directory.
+import { sep } from "node:path";
 import { createRequire } from "node:module";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+function sourceDirectory(name) {
+  const directory = process.env[name];
+  if (!directory) throw new Error(`Set ${name} to the directory containing the source images.`);
+  return directory + sep;
+}
+
 const require = createRequire(import.meta.url);
 const sharp = require(
   require.resolve("sharp", {
     paths: [
-      process.env.STORM_IMAGE_MODULES ||
-        "C:/Users/PC/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      process.env.STORM_IMAGE_MODULES || process.cwd(),
     ],
   }),
 );
-const previous =
-  "E:/Codex/Data/generated_images/01a14f55-915e-7de2-9689-73bfa33d6db1/";
-const current =
-  "E:/Codex/Data/generated_images/01a150be-db1d-7452-94df-4aa5689cf19c/";
+const previous = sourceDirectory("STORM_PREVIOUS_IMAGES");
+const current = sourceDirectory("STORM_CURRENT_IMAGES");
 const tactical = previous + "exec-87a7f81b-192a-4cdb-b75a-393f7af54ff0.png";
 await mkdir("public/storm/art", { recursive: true });
 const names = [
