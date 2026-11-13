@@ -1,0 +1,28 @@
+{
+  "name": "storm-battle",
+  "version": "0.1.3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --import tsx --test tests/platform.test.ts tests/storm.test.ts tests/storm-progression.test.ts tests/storm-economy.test.ts tests/storm-ads.test.ts",
+    "test:browser": "node scripts/storm-browser-check.mjs",
+    "test:economy": "node scripts/storm-economy-check.mjs",
+    "test:progression": "node scripts/storm-progression-check.mjs",
+    "test:submission": "node scripts/storm-submission-check.mjs",
+    "promos": "node scripts/storm-promos.mjs",
+    "capture": "node scripts/storm-capture.mjs",
+    "release": "npm run build && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package.ps1",
+    "test:ad-claims": "node scripts/storm-ad-claims-check.mjs",
+    "test:ad-flows": "node --import tsx scripts/storm-ad-flow-check.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "prettier": "3.6.2",
+    "tsx": "4.20.6",
+    "typescript": "5.7.3",
+    "vite": "6.4.4"
+  }
+}
